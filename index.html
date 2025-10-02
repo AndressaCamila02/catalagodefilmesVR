@@ -91,5 +91,17 @@
             
             // Cria a <div> que será ser o o contéiner de cada filme.
             const filmeDiv = document.createElement('div');
+            filmeDiv.classList.add('filme-item'); // Adiciona uma classe para estilização
+            
+            // Cria o <h3> para o titulo e define seu texto.
+            const tituloH3 = document.createElement('h3');
+            tituloH3.textContent filme.titulo;
+
+            // Cria o <p> para a sinopse e define seu texto.
+            const sinopsep = document.createElement('p');
+            sinopsep.textContent = filme.sinopse;
+            
+            // Cria o botão de remoção.
+        }
 </head>
-</html>
+</html> 
