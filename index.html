@@ -9,7 +9,7 @@
        <link rel="stylesheet" href="style.css">
     </head>
 
-<body>
+    <body>
     
     <h1>Catálogo de Filmes</h1>
     
@@ -48,7 +48,7 @@
         function removerFilme (indice, elementoDOM) {
             catalogo.splice(indice, 1);
             elementoDOM.remove();
-// C. ANEXAR ELEMENTOS (appendChild)
+            // C. ANEXAR ELEMENTOS (appendChild)
             // Monta a estrutura hierárquica:
             // B. DEFINIÇÃO DO EVENTO DE REMOÇÃO (addEventListener)
             // Anexa a função 'removerFilme' ao clique do botão.
@@ -163,13 +163,12 @@
                     alert('Ocorreu um erro ao tentar buscar o filme na API. Verifique sua chave.');
                     console.error('Erro de Fetch:', error);
             }
+
+            form.reset();
         }
-        // 8. ESCUTANDO O EVENTO DO BOTÃO/FORMULARIO
-        // Anexamos a função 'adicionarFilme' ao evento de 'submit' do formulario.
+
+        // 6. ESCUTANDO O EVENTO DO FORMULARIO
         form.addEventListener('submit', adicionarFilme);
-
-        console.log("JavaScript Carregado. Pronto para iniciar o catálogo!");
     </script>
-
-</body>
+    </body>
 </html>
