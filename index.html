@@ -9,7 +9,7 @@
        <link rel="stylesheet" href="style.css">
     </head>
 
-    <body>
+<body>
     
     <h1>Catálogo de Filmes</h1>
     
@@ -31,53 +31,23 @@
     </div>
 
     <script>
-        // A CHAVE SECRETA DA API OMDb (Substitua esta string pela sua chave real!)
         const API_KEY = '7ccfcbac';
 
-        // 1. ARMAZENAMENTO DE DADOS
         const catalogo = JSON.parse(localStorage.getItem('catalagoFilmes')) || [];
 
-        // 2. CAPTURA DE ELEMENTOS DO DOM (Document Object Model)
         const form = document.getElementById('cadastro-filme');
         const tituloInput = document.getElementById('titulo');
         const listaFilmesContainer = document.getElementById('lista-filmes');
 
-        // ------------------------------------------------------------------------------
-        // FUNÇÃO DE REMOÇÃO
-        // ------------------------------------------------------------------------------
         function removerFilme (indice, elementoDOM) {
             catalogo.splice(indice, 1);
+            salvarCatalogo();
             elementoDOM.remove();
-            // C. ANEXAR ELEMENTOS (appendChild)
-            // Monta a estrutura hierárquica:
-            // B. DEFINIÇÃO DO EVENTO DE REMOÇÃO (addEventListener)
-            // Anexa a função 'removerFilme' ao clique do botão.
-            removerBotao.addEventListener('click', () => {
-                // Ao clicar, chamamos a função, passando o indice (posição) e a propria <div> (filmeDiv).
-                removerFilme (indice, filmeDiv);
-            });
-
-            // C. ANEXAR ELEMENTOS (appendChild)
-            // Monta a estrutura hierárquica:
-            // filmeDiv
-            //|- tituloH3
-            //- sinopseP
-            //- removerBotao
-            filmeDiv.appendChild(tituloH3);
-            filmeDiv.appendChild(sinopseP);
-            filmeDiv.appendChild(removerBotao);
-
-            // D. INSERÇÃO NO DOM FINAL
-            // Adiciona o filme montado (filmeDiv) dentro do container principal na página.
-            listaFilmesContainer.appendChild(filmeDiv);
             if (catalogo.length === 0) {
                 listaFilmesContainer.innerHTML = '<p>Nenhum filme cadastrado ainda.</p>';
             }
         }
 
-        // ------------------------
-        // FUNÇÃO DE RENDERIZAÇÃO
-        // ------------------------
         function renderizarFilme (filme, indice) {
             if (catalogo.length === 1) {
                 listaFilmesContainer.innerHTML = '';
@@ -86,7 +56,6 @@
             const filmeDiv = document.createElement('div');
             filmeDiv.classList.add('filme-item');
             
-            // A. Elemento Imagem (Pôster)
             const imagemPoster = document.createElement('div');
             imagemPoster.src = filme.poster && filme.poster !== 'N/A'
                                 ? filme.poster
@@ -94,7 +63,6 @@
             imagemPoster.alt `Poster do filme ${filme.titulo}`;
             imagemPoster.classList.add('filme-info');
 
-            // B. Elementos de Texto e Info
             const infoDiv = document.createElement('div');
             infoDiv.classList.add('filme-info');
 
@@ -102,21 +70,17 @@
             tituloH3.textContent = filme.titulo;
             
             const sinopsep = document.createElement('p');
-            sinopseP.textContent = filme.sinopse;
+            sinopseP.textContent = filme.sinopse || 'Sinopse não disponível';
 
             const removerBotao = document.createElement('button');
             removerBotao.textContent = 'Remover';
             removerBotao.classList.add('btn-remover');
 
-            // C. DEFINIÇÃO DO EVENTO DE REMOÇÃO
             removerBotao.addEventListener('click', () => {
                 const indiceAtual = catalogo.findIndex(f => f.titulo === filme.titulo);
-                if (indiceAtual > -1) {
-                    removerFilme(indice, filmeDiv)
-                }
+                if (indiceAtual > -1) removerFilme(indiceAtual, filmeDiv);
             });
 
-            // D. Montagem do DOM
             infoDiv.appendChild(tituloH3);
             infoDiv.appendChild(sinopseP);
             infoDiv.appendChild(removerBotao);
@@ -135,7 +99,7 @@
             evento.preventDefault();
 
             const titulo = tituloInput.value.trim();
-            if (Ititulo) return;
+            if (!titulo) return;
 
             const tituloFormatado = encodeURIComponent(titulo);
             const url = `https://www.omdbapi.com/?apikey=${API_KEY}&t=${tituloFormatado}`;
@@ -153,23 +117,30 @@
                     };
 
                     catalogo.push(novoFilme);
-                    renderizarFilme (novoFilme, catalogo.length-1);
+                    salvarCatalogo();
+                    renderizarFilme (novoFilme, catalogo.length - 1);
 
                 } else {
-                    alert(`Filme não encontrado na OMDb: "${titulo}".`);
+                    alert(`Filme não encontrado: "${titulo}".`);
                 }
 
             } catch (error) {
-                alert('Ocorreu um erro ao tentar buscar o filme na API. Verifique sua chave.');
-                console.error('Erro de Fetch:', error);
+                alert('Erro ao tentar buscar o filme na API.');
+                console.error('Erro:', error);
             }
 
             form.reset();
         
         }
 
-        // 6. ESCUTANDO O EVENTO DO FORMULARIO
+        function carregarCatalogo(){
+            if (catalogo.length > 0) {
+                listaFilmesContainer.innerHTML = '';
+                catalogo.forEach((filme, i) => renderizarFilme (filme, i));
+            }
+        }
         form.addEventListener('submit', adicionarFilme);
+        carregarCatalogo();
     </script>
-    </body>
+</body>
 </html>
