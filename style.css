@@ -10,6 +10,7 @@ body {
     color: #333;
 }
 form {
+    background: #F4F4F4;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -50,15 +51,15 @@ button:hover {
 /* Container do Filme: Organiza imagem e texto */
 .filme-item {
 
-    display: flex; /* Habilita o alinhamento lado a lado /
+    display: flex; /* Habilita o alinhamento lado a lado */
     align-items: flex-stard; /* Alinhao conteúdo ao topo*/
 
-          border: 1px solid #ccc;
-           padding: 15px;
-           margin-bottom: 15px;
-           border-radius: 4px;
-           background-color: #f9f9f9;
-           box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 /* Estilo do pôster */
@@ -89,11 +90,31 @@ button:hover {
     line-height: 1.4;
 }
 
+/* NOVO: Estilo para o link/Botão do Trailer */
+.btn-trailer {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #620404; /* cor do youtube */
+    color: #ccc !important; /* forca a cor branca no texto do link */
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    font-size: 0.8em;
+}
+
+.btn-trailer:hover {
+    background-color: #452a2a;
+}
+
 /* botão remover */
 .filme-item .btn-remover {
     background-color: #452a2a;
     font-size: 0.8em;
     padding: 5px 10px;
+    margin-bottom: 10px;
 }
 .filme-item .btn-remover:hover {
     background-color: #620404;
