@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-   <head>
-      <meta charset="UTF_8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Catálogo de Filmes Fase 2: Cadastro Manual (DOM Básico)</title>
-
-       <link rel="stylesheet" href="style.css">
-    </head>
-
+<head>
+    <meta charset="UTF_8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Filmes Fase 2: Cadastro Manual (DOM Básico)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
     
     <h1>Catálogo de Filmes</h1>
@@ -32,14 +30,13 @@
 
     <script>
         const API_KEY = '7ccfcbac';
-
-        const catalogo = JSON.parse(localStorage.getItem('catalagoFilmes')) || [];
+        let catalogo = JSON.parse(localStorage.getItem('catalagoFilmes')) || [];
 
         const form = document.getElementById('cadastro-filme');
         const tituloInput = document.getElementById('titulo');
         const listaFilmesContainer = document.getElementById('lista-filmes');
 
-        function removerFilme (indice, elementoDOM) {
+        function removerFilme(indice, elementoDOM) {
             catalogo.splice(indice, 1);
             salvarCatalogo();
             elementoDOM.remove();
@@ -49,14 +46,14 @@
         }
 
         function renderizarFilme (filme, indice) {
-            if (catalogo.length === 1) {
-                listaFilmesContainer.innerHTML = '';
+            if (catalogo.length === 1 && listaFilmesContainer.querySlector('p')) {
+                    listaFilmesContainer.innerHTML = '';
             }
 
             const filmeDiv = document.createElement('div');
             filmeDiv.classList.add('filme-item');
             
-            const imagemPoster = document.createElement('div');
+            const imagemPoster = document.createElement('img');
             imagemPoster.src = filme.poster && filme.poster !== 'N/A'
                                 ? filme.poster
                                 : 'http://www.omdbapi.com/?i=tt3896198&apikey=7ccfcbac';
@@ -69,8 +66,16 @@
             const tituloH3 = document.createElement('h3');
             tituloH3.textContent = filme.titulo;
             
-            const sinopsep = document.createElement('p');
+            const sinopseP = document.createElement('p');
             sinopseP.textContent = filme.sinopse || 'Sinopse não disponível';
+
+            // NOVO: Link para o Trailer no YouTube
+            const trailerLink = document.createElement('a');
+            const termoBusca = encodeURIComponent(`${filme.titulo} trailer oficial`);
+            trailerLink.href = `https://www.youtube.com/results?search_query=${termoBusca}`;
+            trailerLink.target='_blank';
+            trailerLink.textContent =' ► Ver Trailer (YouTube)';
+            trailerLink.classList.add('btn-trailer');
 
             const removerBotao = document.createElement('button');
             removerBotao.textContent = 'Remover';
