@@ -56,8 +56,8 @@ button:hover {
 
     border: 1px solid #ccc;
     padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 4px;
+    margin-bottom: 20px;
+    border-radius: 8px;
     background-color: #f9f9f9;
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
@@ -109,13 +109,10 @@ button:hover {
     background-color: #452a2a;
 }
 
-/* botão remover */
+
 .filme-item .btn-remover {
-    background-color: #452a2a;
-    font-size: 0.8em;
+    background-color: #620404;
+    font-size: 8.8em;
     padding: 5px 10px;
     margin-bottom: 10px;
-}
-.filme-item .btn-remover:hover {
-    background-color: #620404;
 }

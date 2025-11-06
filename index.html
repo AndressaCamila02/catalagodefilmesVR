@@ -88,6 +88,7 @@
 
             infoDiv.appendChild(tituloH3);
             infoDiv.appendChild(sinopseP);
+            infoDiv.appendChild(trailerLink);
             infoDiv.appendChild(removerBotao);
 
             filmeDiv.appendChild(imagemPoster);
@@ -102,12 +103,10 @@
         // ------------------------
         async function adicionarFilme(evento) {
             evento.preventDefault();
-
             const titulo = tituloInput.value.trim();
             if (!titulo) return;
 
-            const tituloFormatado = encodeURIComponent(titulo);
-            const url = `https://www.omdbapi.com/?apikey=${API_KEY}&t=${tituloFormatado}`;
+            const url = `https://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(titulo)}&lang=pt`;
             
             try {
                 const resposta = await fetch(url);
@@ -126,7 +125,7 @@
                     renderizarFilme (novoFilme, catalogo.length - 1);
 
                 } else {
-                    alert(`Filme não encontrado: "${titulo}".`);
+                    alert(`Filme não encontrado: "${titulo}". Verefique.`);
                 }
 
             } catch (error) {
@@ -147,5 +146,7 @@
         form.addEventListener('submit', adicionarFilme);
         carregarCatalogo();
     </script>
+
+    
 </body>
 </html>
