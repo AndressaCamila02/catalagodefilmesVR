@@ -4,10 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Catálogo de Filmes VR</title>
-
-
    <link rel="stylesheet" href="style.css">
-
 
 </head>
 <body>
@@ -21,6 +18,34 @@
             <button class="menu-toggle">☰</button>
         </nav>
     </header>
+
+    <section class="controls-section">
+            <input type="text" placeholder="Que buscar filme..." class="search-input">
+    </section>
+
+    <select class="filter-dropdonw" aria-label="Gênero">
+        <option value="">Gênero</option>
+        <option value="acao">Ação</option>
+        <option value="comedia">Comédia</option>
+    </select>
+
+    <select class="filter-dropdonw" aria-label="Ordenar por">
+        <option value="default">Ordenar</option>
+        <option value="recentes">Mais Recentes</option>
+        <option value="avaliacao">Melhor Avaliação</option>
+    </select>
+
+    <main class="main-content">
+        <div class="lista-filmes">
+            <div class="card-filme">
+                <imag src="[URL_DO_POSTER]" alt="Título Longo Do Filme" class="poster-filme"
+                <span class="avaliacao">⭐ 7.4</span>
+                <div class="card-detalhes">
+                    <h3 class="titulo-filme"> Título Longo do Filme (2025)</h3>
+                    <button class="botao-adicionar">+ Minha Lista</button>
+            </div>
+        </div>
+    </main>
   
    <h1>Catálogo de Filmes</h1>
 
@@ -35,10 +60,6 @@
 
        <button type="submit">Adicionar Filme</button>
    </form>
-
-
-   <hr>
-
 
    <h2>Minha Lista de Filmes</h2>
   

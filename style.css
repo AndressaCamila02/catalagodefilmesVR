@@ -6,9 +6,11 @@ body {
    margin: 0 auto;
    background-color: #f4f4f4;
 }
+
 h1, h2 {
    color: #fff;
 }
+
 form {
    background: #fff;
    padding: 20px;
@@ -17,11 +19,13 @@ form {
    margin-bottom: 20px;
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 label {
    display: block;
    margin-bottom: 5px;
    font-weight: bold;
 }
+
 input[type="text"] {
    width: 100%;
    padding: 8px;
@@ -31,6 +35,24 @@ input[type="text"] {
    box-sizing: border-box;
 }
 
+.nav-menu a {
+   margin-left: 20px;
+   font-size: 1em;
+   transition: color 0.2s;
+}
+
+.nav-menu a:hover {
+   color: #00e0b3;
+}
+
+.menu-toggle {
+   display: none; /* Escondido no desktop */
+   background: none;
+   border: none;
+   color: #ffffff;
+   font-size: 1.5em;
+   cursor: pointer;
+}
 
 button {
    padding: 10px 15px;
@@ -41,6 +63,7 @@ button {
    cursor: pointer;
    transition: backgroud-color 0.2s;
 }
+
 button:hover {
    background-color: #0056b3;
 }
@@ -65,7 +88,6 @@ button:hover {
    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 /* Estilo do Póster */
 .filme-poster {
    width: 100px;
@@ -76,19 +98,16 @@ button:hover {
    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-
 /* Estilo do Bloco de Informações */
 .filme-info {
    flex-grow: 1; /* Ocupa o espaço restante */
 }
-
 
 .filme-info h3 {
    margin-top: 0;
    color: #007bff;
    font-size: 1.2em;
 }
-
 
 .filme-info p {
    font-style: normal;
@@ -97,13 +116,13 @@ button:hover {
    line-height: 1.4;
 }
 
-
 /* Botão remover */
 .filme-item .btn-remover {
    background-color: #dc3545;
    font-size: 0.8em;
    padding: 5px 10px;
 }
+
 .filme-item .btn-remover:hover {
    background-color: #c82333;
 }
