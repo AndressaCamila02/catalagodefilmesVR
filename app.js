@@ -15,4 +15,5 @@ function criarCardFilme (filme) {
     card.dataset.imdbId = filme.imdbID;
     // Garante que o rating seja um valor presente
     const rating = filme.imdbRating? `⭐ ${filme.imdbRating}` : `⭐N/A;`;
+    
 }
