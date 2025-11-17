@@ -1,142 +1,68 @@
+/* --- 1. RESET BASICO E CONFIGURAÇÕES GLOBAIS --- */
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho do elemento */
+}
 
 body {
    font-family: Arial, sans-serif;
-   padding: 20px;
-   max-width: 800px;
-   margin: 0 auto;
-   background-color: #f4f4f4;
+   background-color: #121212; /* Fundo Escuro Principal */
+   color: #ffffff; /* Texto Claro */
 }
 
-h1, h2 {
-   color: #fff;
+a {
+   color: #ffffff;
+   text-decoration: none;
 }
 
-form {
-   background: #fff;
-   padding: 20px;
-}
-   
-button {
-   padding: 10px 15px;
-   background-color: #007bff;
-   color: white;
-   border: none;
-   border-radius: 4px;
-   cursor: pointer;
-   transition: backgroud-color 0.2s;
+/* --- 2. HEADER E NAVEGAÇÃO */
+.header {
+   background-color: #1f1f1f;
+   padding: 15px 30px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   position: sticky; /* Fixo no topo */
+   top: 0;
+   z-index: 1000;
 }
 
-button:hover {
-   background-color: #0056b3;
-}
-
-
-/*----------------------------------------------------*/
-/* ESTILOS PARA A FAASE 2: LISTA COM PÓSTER (Flexbox)*/
-/*---------------------------------------------------*/
-
-
-/* Contêiner do Filme: Organiza imagem e texto */
-.filme-item {
-   display: flex; /* Habilita o alinhamento lado a lado */
-   align-items: flex-start; /* Alinha o conteúdo ao todo */
-
-
-   border: 1px solid #ddd;
-   padding: 15px;
-   margin-bottom: 20px;
-   border-radius: 8px;
-   background-color: #fff;
-   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo do Póster */
-.filme-poster {
-   width: 100px;
-   height: 150px;
-   object-fit: cover;
-   margin-right: 15px; /* Espaço entre o pôster e o texto */
-   border-radius: 4px;
-   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilo do Bloco de Informações */
-.filme-info {
-   flex-grow: 1; /* Ocupa o espaço restante */
-}
-
-.filme-info h3 {
-   margin-top: 0;
-   color: #007bff;
-   font-size: 1.2em;
-}
-
-.filme-info p {
-   font-style: normal;
-   color: #555;
-   margin-bottom: 15px;
-   line-height: 1.4;
-}
-
-/* Botão remover */
-.filme-item .btn-remover {
-   background-color: #dc3545;
-   font-size: 0.8em;
-   padding: 5px 10px;
-}
-
-.filme-item .btn-remover:hover {
-   background-color: #c82333;
-   border: 1px solid #eb3535;
-   border-radius: 5px;
-   margin-bottom: 20px;
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-label {
-   display: block;
-   margin-bottom: 5px;
+.logo {
+   font-size: 1.8em;
    font-weight: bold;
-}
-
-input[type="text"] {
-   width: 100%;
-   padding: 8px;
-   margin-bottom: 10px;
-   border: 1px solid #ccc;
-   border-radius: 4px;
-   box-sizing: border-box;
+   color: #84c2bf;
 }
 
 .nav-menu a {
-   margin-left: 20px;
+   margin-left:  20px;
    font-size: 1em;
    transition: color 0.2s;
 }
 
 .nav-menu a:hover {
-   color: #00e0b3;
+   color: #8ff5e0;
 }
 
 .menu-toggle {
-   display: none; /* Escondido no desktop */
+   display: none;
    background: none;
    border: none;
-   color: #ffffff;
+   color: #ccc;
    font-size: 1.5em;
    cursor: pointer;
 }
 
+/* --- 3. CONTROLES (Busca e Filtros) --- */
 .controls-section {
    display: flex;
    justify-content: center;
    align-items: center;
    gap: 15px;
    padding: 30px 20px;
-   background-color:#121212;
+   background-color: #121212;
    flex-wrap: wrap; /* Permite quebras de linha em telas pequenas */
 }
-
 .search-bar {
    flex-grow: 1;
    max-width: 400px; /* Limita o tamanho da busca no desktop */
@@ -153,7 +79,7 @@ input[type="text"] {
 
 /* Estilo para a caixa de seleção */
 .filter-dropdown {
-   width: auto;
+   width:auto;
    cursor: pointer;
 }
 
@@ -163,39 +89,38 @@ input[type="text"] {
 }
 
 .lista-filmes {
-   display:
-   grid;
+   display: grid;
    gap: 25px; /* Espaçamento entre os cards */
-   
+
    /* A MAGICA DO RESPONSIVO: Ajuste automático de colunas */
-   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   grid-template-columns: repeat (auto-fit, minmax(200px, 1fr));
    justify-content: center;
 }
 
-/* --- 5. CARDS DE FILMES --- */
+/* ---5. CARDS DE FILMES */
 .card-filme {
    background-color:#1f1f1f;
    border-radius: 10px;
-   overflow: hidden; /*  Garante que o poster não saia da borda arredondada */
+   overflow: hidden; /* Garante que o poster não saia da borda arredondada */
    position: relative;
-   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
    transition: transform 0.3s ease;
 }
 
 .card-filme:hover {
    transform: translateY(-8px); /* Efeito de elevação sutil no hover */
-   box-shadow: 
-   0 10px 20px rgba(0, 0, 0, 0.7);
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
 }
 
 .poster-filme {
    width: 100%;
    height: auto;
    display: block;
-   aspect-ratio: 2/3; /* Proporção tipica de posteres de cinema */
+   aspect-ratio: 2/3; /* Proporção típica de posteres de cinema */
 }
-
 .avaliacao {
+   position: absolute;
+   top: 10px;
    right: 10px;
    background-color: rgba(0, 0, 0, 0.7);
    padding: 5px 8px;
@@ -203,6 +128,7 @@ input[type="text"] {
    font-size: 0.9em;
    font-weight: bold;
 }
+
 .card-detalhes {
    padding: 15px;
 }
@@ -210,7 +136,7 @@ input[type="text"] {
 .titulo-filme {
    font-size: 1.1em;
    margin-bottom: 10px;
-   color: #fefefe;
+   color: #f0f0f0;
 }
 
 .botao-adicionar {
@@ -225,19 +151,20 @@ input[type="text"] {
 }
 
 .botao-adicionar:hover {
- background-color:#00c7a0;
+background-color: #00c7a0;
 }
 
-/*--- 6. RESPONSIVIDADE (Ajustes para Telas Menores/Celulares) */
+
+/* --- 6. RESPONSIVIDADE (Ajustes para Telas Menores/Celulares) --- */
 @media (max-width: 768px) {
 
-   /*Header (Oculta links no mobile, mostra o botão do menu) */
+   /* Header (Oculta links no mobile, mostra o botão do menu) */
    .nav-menu a {
       display: none;
    }
 
    .menu-toggle {
-      display: block; /* Mostra o icone de menu hamburger */
+      display: block; /* Mostra o ícone de menu hamburger */
    }
 
    /* Controles (Altera a ordem, a busca fica no topo) */
@@ -246,7 +173,7 @@ input[type="text"] {
       gap: 10px;
       padding: 20px;
    }
-
+   
    .search-bar {
       width: 100%;
       max-width: none;
@@ -255,11 +182,11 @@ input[type="text"] {
    .filter-dropdown {
       width: 100%;
    }
-   
-   /*ista de Filmes (Layout cos menos colunas para telas menores) */
+
+   /* Lista de Filmes (Layout com menos colunas para telas menores) */
    .lista-filmes {
-      /*No celular, a largura minima para o card e maior, forçando 1 ou 2 colunas */
+      /* No celular, a largura mínima para o card maior,
+         forçando 1 ou 2 colunas */
       grid-template-columns: repeat (auto-fit, minmax (150px, 1fr));
    }
-
 }
