@@ -5,9 +5,9 @@ const searchInput = document.querySelector('.search-input');
 
 //--- A. Função para Criar o HTML do Card ---
 /**
-*Cria o elemento HTML de um Card de Filme com os dados da OMDB.
-*@param {Object} filme - Objeto de filme retornado pela API.
-*/
+ *Cria o elemento HTML de um Card de Filme com os dados da OMDB.
+ *@param {Object} filme - Objeto de filme retornado pela API.
+ */
 function criarCardFilme (filme) {
     const card = document.createElement('div');
     card.classList.add('card-filme');
@@ -37,6 +37,7 @@ function criarCardFilme (filme) {
 
     return card;
 }
+
 // --- B. Função Principal de Busca ---
 /**
     * Busca o filme na OMDB e atualiza o container.
@@ -52,23 +53,69 @@ async function buscarFilmes (termo) {
         // Busca na OMDB (O parametro 's' para busca por termo)
         const response = await fetch(`https://www.omdbapi.com/?s=${termo}&apikey=${OMDB_API_KEY}`);
         const data = await response.json();
-// Limpa o container novamente
-listaFilmes Container.innerHTML = '';
-if (data. Response === 'True' && data.Search) {
-data.Search.forEach(async (filmeBase) => {
-// A OMDB retorna apenas dados básicos na busca (s=).
-// Precisamos de uma segunda busca (i=) para pegar o Rating.
-const filmeDetalhado await buscarDetalhes (filmeBase.imdbID);
-if (filmeDetalhado) {
-listaFilmesContainer.appendChild(criarCardFilme (filmeDetalhado));
+
+        // Limpa o container novamente
+        listaFilmesContainer.innerHTML = '';
+    
+        if (data. Response === 'True' && data.Search) {
+            data.Search.forEach(async (filmeBase) => {
+                // A OMDB retorna apenas dados básicos na busca (s=).
+                // Precisamos de uma segunda busca (i=) para pegar o Rating.
+                const filmeDetalhado = await buscarDetalhes (filmeBase.imdbID);
+                if (filmeDetalhado) {
+                    listaFilmesContainer.appendChild(criarCardFilme (filmeDetalhado));
+                }
+            });
+        } else {
+            listaFilmesContainer.innerHTML = `<p style="text-align: center;">Nenhum filme encontrado para "${termo}".</p>`;
+        }
+    } catch (error) {
+        console.error("Erro ao buscar filmes:", error);
+        listaFilmesContainer.innerHTML = '<p style="text-align: center; color: red;">Erro na conexão com a API.</p>';
+    }
 }
+
+// --- C. Função para Buscar Detalhes e Trailer (Chamada Adicional) ---
+// NECESSARIA pois a OMDB não retorna o Rating na busca por 's'
+async function buscarDetalhes (imdbID) {
+    try {
+        // Busca na OMDB (O parametro 'i' para busca por ID)
+        const response = await fetch(`https://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=${OMDB_API_KEY}`);
+        const data = await response.json();
+        return data. Response === 'True' ? data: null;
+    } catch (error) {
+        console.error("Erro ao buscar detalhes:", error);
+        return null;
+    }
 }
+
+//--D. Logica para Exibir Detalhes/Trailer (Implementação do Modal) ---
+// Se você usava uma API diferente para trailer, integre-a aqui.
+function buscarEExibirDetalhes (imdbID) {
+    // 1. Voce faria uma nova busca (na OMDB ou em outra API como a TheMovieDB/YouTube)
+    // para obter o link do trailer ou mais detalhes.
+
+    // 2. Voce criaria um elemento de Modal (janela pop-up) com o trailer/detalhes.
+
+    alert(`Funcionalidade de Detalhes/Trailer para o ID: ${imdbID} (Ainda precisa ser implementada).`);
+    // Exemplo de como abrir um link se voce tiver o URL do trailer:
+    // window.open('LINK_DO_TRAILER', '_blank');
 }
+
+// E. Implementação do DEBOUNCE na Busca
+// Isso evita chamar a API a cada tecla digitada.
+let searchTimeout;
+searchInput.addEventListener('input', (event) => {
+    // Limpa o timeout anterior para evitar chamadas multiplas
+    clearTimeout(searchTimeout);
+    // Define um novo timeout para buscar apps 500 milissegundos (0.5s)
+    searchTimeout = setTimeout(() => {
+        buscarFilmes (event.target.value.trim());
+    }, 500);
 });
-} else {
-}
-listaFilmes Container.innerHTML = <p style="text-align: center;">Nenhum filme encontrado para "${termo}".</p>';
-} catch (error) {
-console.error("Erro ao buscar filmes:", error);
-listaFilmes Container.innerHTML = '<p style="text-align: center; color: red;">Erro na conexão com a API.</p>';
-}
+
+// Exemplo de carregamento inicial
+document.addEventListener('DOMContentLoaded', () => {
+    // Busca filmes ao carregar a página (Ex: os mais recentes)
+    buscarFilmes('popular');
+});
