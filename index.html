@@ -13,39 +13,56 @@
         <div class="logo">► FILMFLIX</div>
         <nav class="nav-menu">
             <a href="#">Minha Lista</a>
-            <a href="#">Generos</a>
+            <a href="#">Gêneros</a>
             <a href="#">Sobre</a>
             <button class="menu-toggle">☰</button>
         </nav>
     </header>
 
     <section class="controls-section">
+        <div class="search-bar">
             <input type="text" placeholder="Que buscar filme..." class="search-input">
+        </div>
+
+        <select class="filter-dropdonw" aria-label="Gênero">
+            <option value="">Gênero</option>
+            <option value="acao">Ação</option>
+            <option value="comedia">Comédia</option>
+        </select>
+
+        <select class="filter-dropdonw" aria-label="Ordenar por">
+            <option value="default">Ordenar</option>
+            <option value="recentes">Mais Recentes</option>
+            <option value="avaliacao">Melhor Avaliação</option>
+        </select>
     </section>
-
-    <select class="filter-dropdonw" aria-label="Gênero">
-        <option value="">Gênero</option>
-        <option value="acao">Ação</option>
-        <option value="comedia">Comédia</option>
-    </select>
-
-    <select class="filter-dropdonw" aria-label="Ordenar por">
-        <option value="default">Ordenar</option>
-        <option value="recentes">Mais Recentes</option>
-        <option value="avaliacao">Melhor Avaliação</option>
-    </select>
 
     <main class="main-content">
         <div class="lista-filmes">
             <div class="card-filme">
-                <imag src="[URL_DO_POSTER]" alt="Título Longo Do Filme" class="poster-filme"
+                <imag src="[URL_DO_POSTER]" alt="Título Longo Do Filme" class="poster-filme">
                 <span class="avaliacao">⭐ 7.4</span>
                 <div class="card-detalhes">
                     <h3 class="titulo-filme"> Título Longo do Filme (2025)</h3>
                     <button class="botao-adicionar">+ Minha Lista</button>
             </div>
+        
+
+            <div class="card-filme">
+                <imag src="[URL_DO_POSTER]" alt="Título Longo Do Filme" class="poster-filme">
+                <span class="avaliacao">⭐ 8.1</span>
+                <div class="card-detalhes">
+                    <h3 class="titulo-filme"> Título Longo do Filme (2024)</h3>
+                    <button class="botao-adicionar">+ Minha Lista</button>
+                </div>
+            </div>
+            
         </div>
     </main>
+            
+    </body>
+    <script src="app.js"></script>
+</html>
   
    <h1>Catálogo de Filmes</h1>
 
