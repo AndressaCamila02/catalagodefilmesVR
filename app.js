@@ -14,7 +14,7 @@ function criarCardFilme (filme) {
     // Adiciona o IMDB ID como um data-attribute para buscar detalhes/trailer depois
     card.dataset.imdbId = filme.imdbID;
     // Garante que o rating seja um valor presente
-    const rating = filme.imdbRating? `⭐ ${filme.imdbRating}` : `⭐N/A;`;
+    const rating = filme.imdbRating ? `⭐ ${filme.imdbRating}` : `⭐N/A;`;
     
     // Conteúdo HTML do card, usando as novas classes CSS
     card.innerHTML = `
